@@ -26,4 +26,11 @@ export class ConfigurationService {
     }
     return this.config.apiAuthUrl;
   }
+
+  public getApiReportUrl() {
+    if (!this.isLoaded()) {
+      throw Error('Config file not loaded!');
+    }
+    return this.config.apiReportUrl;
+  }
 }
