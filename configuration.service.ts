@@ -16,21 +16,17 @@ export class ConfigurationService {
     this.config = data;
   }
 
-  private isLoaded() {
+  private isLoaded(): boolean {
     return this.config !== undefined;
   }
-  
-  public getApiAuthUrl() {
-    if (!this.isLoaded()) {
-      throw Error('Config file not loaded!');
-    }
-    return this.config.apiAuthUrl;
-  }
 
-  public getApiReportUrl() {
+  public get(key: string): string {
     if (!this.isLoaded()) {
       throw Error('Config file not loaded!');
     }
-    return this.config.apiReportUrl;
+    if (!(key in this.config)) {
+      throw Error(`Config file missing key: ${key}`);
+    }
+    return this.config[key];
   }
 }
